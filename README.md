@@ -2,7 +2,7 @@
 
 ![Maven Central](https://img.shields.io/maven-central/v/org.PrachandEHR.openehr/server) ![Docker Image Version (latest semver)](https://img.shields.io/docker/v/PrachandEHR/PrachandEHR?sort=semver) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=PrachandEHR_PrachandEHR&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=PrachandEHR_PrachandEHR) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
-[![PrachandEHR Logo](PrachandEHR.png)](PrachandEHR.png)
+[![PrachandEHR Logo](ehrbase.png)](PrachandEHR.png)
 
 PrachandEHR is an [openEHR](https://www.openehr.org/) Clinical Data Repository, providing a standard-based backend for
 interoperable clinical applications. It implements the latest version of the openEHR Reference Model (RM 1.1.0) and
