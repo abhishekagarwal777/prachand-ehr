@@ -1,12 +1,12 @@
 # Prachand_EHR
 
-![Maven Central](https://img.shields.io/maven-central/v/org.ehrbase.openehr/server) ![Docker Image Version (latest semver)](https://img.shields.io/docker/v/ehrbase/ehrbase?sort=semver) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ehrbase_ehrbase&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ehrbase_ehrbase) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+![Maven Central](https://img.shields.io/maven-central/v/org.PrachandEHR.openehr/server) ![Docker Image Version (latest semver)](https://img.shields.io/docker/v/PrachandEHR/PrachandEHR?sort=semver) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=PrachandEHR_PrachandEHR&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=PrachandEHR_PrachandEHR) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
-[![EHRbase Logo](ehrbase.png)](ehrbase.png)
+[![PrachandEHR Logo](PrachandEHR.png)](PrachandEHR.png)
 
-EHRbase is an [openEHR](https://www.openehr.org/) Clinical Data Repository, providing a standard-based backend for
+PrachandEHR is an [openEHR](https://www.openehr.org/) Clinical Data Repository, providing a standard-based backend for
 interoperable clinical applications. It implements the latest version of the openEHR Reference Model (RM 1.1.0) and
-version 1.4 of the Archetype Definition Language (ADL). Applications can use the capabilities of EHRbase through the
+version 1.4 of the Archetype Definition Language (ADL). Applications can use the capabilities of PrachandEHR through the
 latest version of the [openEHR REST API](https://specifications.openehr.org/releases/ITS-REST/latest/) and model-based
 queries using the [Archetype Query Language](https://specifications.openehr.org/releases/QUERY/latest/AQL.html).
 
@@ -14,17 +14,17 @@ queries using the [Archetype Query Language](https://specifications.openehr.org/
 
 ## Release notes
 
-Please check the [CHANGELOG](https://github.com/ehrbase/ehrbase/blob/develop/CHANGELOG.md)
+Please check the [CHANGELOG](https://github.com/PrachandEHR/PrachandEHR/blob/develop/CHANGELOG.md)
 
 ## Documentation
 
-Check out the documentation at https://docs.ehrbase.org
+Check out the documentation at https://docs.prachandehr.org
 
-## Quick Start: Run EHRbase with Docker
+## Quick Start: Run PrachandEHR with Docker
 
-Check out the Installation guide at https://docs.ehrbase.org/docs/EHRbase/installation
+Check out the Installation guide at https://docs.prachandehr.org/docs/prachandEHR/installation
 
-## Building and Installing EHRbase
+## Building and Installing PrachandEHR
 
 These instructions will get you a copy of the project up and running on your local machine **for development and testing
 purposes**. Please read these instructions carefully. See [deployment](#deployment) for notes on how to deploy the
@@ -32,7 +32,7 @@ project on a live system.
 
 ### Prerequisites
 
-You will need Java JDK/JRE 21 (preferably openJDK: e.g. from https://adoptopenjdk.net/)
+You will need Python/pyenv & Java JDK/JRE 21 (preferably openJDK: e.g. from https://adoptopenjdk.net/)
 
 You will need a Postgres Database (at least Version 15 or higher, Version 16 recommended) (Docker image or local installation).
 We recommend the Docker image to get started quickly.
@@ -41,59 +41,59 @@ We recommend the Docker image to get started quickly.
 
 #### 1. Setup database
 
-> NOTE: Building EHRbase requires a properly set-up and running DB for the following steps.
+> NOTE: Building PrachandEHR requires a properly set-up and running DB for the following steps.
 
 Run `./createdb.sql` as `postgres` User.
 
 You can also use this Docker image which is a preconfigured Postgres database:
 
 ```shell
-    docker network create ehrbase-net
-    docker run --name ehrdb --network ehrbase-net -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 ehrbase/ehrbase-v2-postgres:16.2
+    docker network create prachandehr-net
+    docker run --name ehrdb --network prachandehr-net -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 prachandehr/prachandehr-v2-postgres:16.2
 ```
 
-(For a preconfigured EHRbase application Docker image and its usage see the [Installation](https://docs.ehrbase.org/docs/EHRbase/installation) guide.
+(For a preconfigured PrachandEHR application Docker image and its usage see the [Installation](https://docs.PrachandEHR.org/docs/PrachandEHR/installation) guide.
 
 #### 2. Setup Maven environment
 
 Edit the database properties in  `./pom.xml` if necessary
 
-#### 3. Build EHRbase
+#### 3. Build PrachandEHR
 
 Run `mvn package`
 
-#### 4. Run EHRbase
+#### 4. Run PrachandEHR
 
-Replace the * with the current version, e.g. `application/target/ehrbase-2.0.0.jar`
+Replace the * with the current version, e.g. `application/main/prachandEHR-2.0.0.jar`
 
-`java -jar application/target/ehrbase-*.jar`
+`java -jar application/main/prachandEHR-*.jar`
 
 ### Authentication Types
 
 #### 1. Basic Auth
 
-EHRbase can use Basic Authentication for all resources. This means you have to send an 'Authorization' header
+PrachandEHR can use Basic Authentication for all resources. This means you have to send an 'Authorization' header
 set with keyword `Basic` followed by the authentication information in Base64 encoded username and password. To
 generate the Base64 encoded username and password combination create the string after the following schema:
 `username:password`.
 
 The Basic Auth mechanism is implemented as "opt-in" and can be activated either by providing an environment variable
-`SECURITY_AUTHTYPE=BASIC` with the start command or by adding the value into the target application.yml file.
+`SECURITY_AUTHTYPE=BASIC` with the start command or by adding the value into the main application.yml file.
 
 Currently we have support one user with password which can be set via environment variables `SECURITY_AUTHUSER` and
-`SECURITY_AUTHPASSWORD`. By default these values are set with `ehrbase-user` and `authPassword=SuperSecretPassword`
+`SECURITY_AUTHPASSWORD`. By default these values are set with `PrachandEHR-user` and `authPassword=SuperSecretPassword`
 and can be overridden by environment values. Alternatively you can set them inside the corresponding application.yml
 file.
 
 The same applies to the *admin* user, via `SECURITY_AUTHADMINUSER`, `SECURITY_AUTHADMINPASSWORD`
-and their default values of `ehrbase-admin` and `EvenMoreSecretPassword`.
+and their default values of `PrachandEHR-admin` and `EvenMoreSecretPassword`.
 
 #### 2. OAuth2
 
 Environment variable `SECURITY_AUTHTYPE=OAUTH` is enabling OAuth2 authentication.
 
 Additionally, setting the following variable to point to the existing OAuth2 server and realm is necessary:
-`SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI=http://localhost:8081/auth/realms/ehrbase`
+`SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI=http://localhost:8081/auth/realms/prachandEHR`
 
 Two roles are available: a user role, and admin role. By default, these roles are expected to be named `USER` and
 `ADMIN`. The names of these roles can be customised through the `SECURITY_OAUTH2USERROLE` and `SECURITY_OAUTH2ADMINROLE`
@@ -104,7 +104,21 @@ claim of the JWT used for authentication.
 
 ### Codestyle/Formatting
 
-EHRbase java sourcecode is using [palantir-java-format](https://github.com/palantir/palantir-java-format) codestyle.
+PrachandEHR Python source code is using the [black](https://github.com/psf/black) code formatter.
+
+The formatting is checked and applied using the [pre-commit](https://pre-commit.com/) framework.
+
+To apply the code style, run the following in the root directory of the project:
+bash-
+black .
+
+To check if the code conforms to the code style, run:
+bash-
+black --check .
+
+-*-*- These commands can also be run for a single module by specifying the path to the module directory. -*-*-
+
+PrachandEHR java sourcecode is using [palantir-java-format](https://github.com/palantir/palantir-java-format) codestyle.
 The formatting is checked and applied using
 the [spotless-maven-plugin](https://github.com/diffplug/spotless/tree/main/plugin-maven).
 To apply the codestyle run the `com.diffplug.spotless:spotless-maven-plugin:apply` maven goal in the root directory of
@@ -142,17 +156,17 @@ Please be aware that `@formatter:off/on` should only be used on rare occasions t
 
 ## Running the tests
 
-For integration tests please refer to the [integration-test](https://github.com/ehrbase/integration-tests) repository
+For integration tests please refer to the [integration-test](https://github.com/prachandEHR/integration-tests) repository
 
 ## Deployment
 
- 1. `java -jar application/target/ehrbase-*.jar` You can override the application properties (like database settings) using the normal spring boot mechanism: [Command-Line Arguments in Spring Boot](https://www.baeldung.com/spring-boot-command-line-arguments)
- 2. Browse to Swagger UI --> http://localhost:8080/ehrbase/swagger-ui.html
+ 1. `java -jar application/main/prachandEHR-*.jar` You can override the application properties (like database settings) using the normal spring boot mechanism: [Command-Line Arguments in Spring Boot](https://www.baeldung.com/spring-boot-command-line-arguments)
+ 2. Browse to Swagger UI --> http://localhost:8080/PrachandEHR/swagger-ui.html
 
 ## Updating
 
-Before updating to a new version of EHRBase check [UPDATING.md](UPDATING.md) for any backwards-incompatible changes and additional
-steps needed in EHRBase. New Releases may introduce DB changes. It is thus recommend to make a DB backup before
+Before updating to a new version of PrachandEHR check [UPDATING.md](UPDATING.md) for any backwards-incompatible changes and additional
+steps needed in PrachandEHR. New Releases may introduce DB changes. It is thus recommend to make a DB backup before
 updating.
 
 ## Built With
@@ -163,23 +177,23 @@ updating.
 
 ## Acknowledgments
 
-EHRbase contains code and derived code from EtherCIS (ethercis.org) which has been developed by Christian Chevalley (
+PrachandEHR contains code and derived code from EtherCIS (ethercis.org) which has been developed by Christian Chevalley (
 ADOC Software Development Co.,Ltd).
 Dr. Tony Shannon and Phil Berret of the [Ripple Foundation CIC Ltd, UK](https://ripple.foundation/) and Dr. Ian
 McNicoll (FreshEHR Ltd.) greatly contributed to EtherCIS.
 
-EHRbase heavily relies on the openEHR Reference Model implementation ([Archie](https://github.com/openEHR/archie)) made
+PrachandEHR heavily relies on the openEHR Reference Model implementation ([Archie](https://github.com/openEHR/archie)) made
 by Nedap. Many thanks to Pieter Bos and his team for their work!
 
-EHRbase is jointly developed by [Vitasystems GmbH](https://www.vitagroup.ag/de_DE/Ueber-uns/vitasystems)
+PrachandEHR is jointly developed by [Vitasystems GmbH](https://www.vitagroup.ag/de_DE/Ueber-uns/vitasystems)
 and [Peter L. Reichertz Institute for Medical Informatics of TU Braunschweig and Hannover Medical School](https://www.plri.de/)
 
 
 ## License
 
-EHRbase uses the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+PrachandEHR uses the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/ehrbase/ehrbase.svg)](https://starchart.cc/ehrbase/ehrbase)
+[![Stargazers over time](https://starchart.cc/PrachandEHR/PrachandEHR.svg)](https://starchart.cc/PrachandEHR/PrachandEHR)
 # prachand-ehr
