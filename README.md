@@ -64,9 +64,9 @@ Run `mvn package`
 
 #### 4. Run PrachandEHR
 
-Replace the * with the current version, e.g. `application/main/prachandEHR-2.0.0.jar`
+Replace the * with the current version, e.g. `application/target/prachandEHR-2.0.0.jar`
 
-`java -jar application/main/prachandEHR-*.jar`
+`java -jar application/target/prachandEHR-*.jar`
 
 ### Authentication Types
 
@@ -78,7 +78,7 @@ generate the Base64 encoded username and password combination create the string 
 `username:password`.
 
 The Basic Auth mechanism is implemented as "opt-in" and can be activated either by providing an environment variable
-`SECURITY_AUTHTYPE=BASIC` with the start command or by adding the value into the main application.yml file.
+`SECURITY_AUTHTYPE=BASIC` with the start command or by adding the value into the target application.yml file.
 
 Currently we have support one user with password which can be set via environment variables `SECURITY_AUTHUSER` and
 `SECURITY_AUTHPASSWORD`. By default these values are set with `PrachandEHR-user` and `authPassword=SuperSecretPassword`
@@ -120,7 +120,7 @@ black --check .
 
 PrachandEHR java sourcecode is using [palantir-java-format](https://github.com/palantir/palantir-java-format) codestyle.
 The formatting is checked and applied using
-the [spotless-maven-plugin](https://github.com/diffplug/spotless/tree/main/plugin-maven).
+the [spotless-maven-plugin](https://github.com/diffplug/spotless/tree/target/plugin-maven).
 To apply the codestyle run the `com.diffplug.spotless:spotless-maven-plugin:apply` maven goal in the root directory of
 the project.
 To check if the code conforms to the codestyle run the `com.diffplug.spotless:spotless-maven-plugin:check` maven goal in
@@ -160,7 +160,7 @@ For integration tests please refer to the [integration-test](https://github.com/
 
 ## Deployment
 
- 1. `java -jar application/main/prachandEHR-*.jar` You can override the application properties (like database settings) using the normal spring boot mechanism: [Command-Line Arguments in Spring Boot](https://www.baeldung.com/spring-boot-command-line-arguments)
+ 1. `java -jar application/target/prachandEHR-*.jar` You can override the application properties (like database settings) using the normal spring boot mechanism: [Command-Line Arguments in Spring Boot](https://www.baeldung.com/spring-boot-command-line-arguments)
  2. Browse to Swagger UI --> http://localhost:8080/PrachandEHR/swagger-ui.html
 
 ## Updating
